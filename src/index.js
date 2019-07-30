@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { Router, Route, HashRouter, Redirect } from 'react-router-dom'
+import Home from './components/Home'
+import Summer from './components/summer'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// const hashHistory = require('history').createHashHistory
+//ReactDOM.render(<Home />, document.getElementById('root'));
+ReactDOM.render(
+    <HashRouter>
+        <Redirect from='/' to='/Index'/>
+        <Route path='/Index' component={Home} />
+        <Route path='/Summer/join' component={Summer} />
+    </HashRouter>,
+document.getElementById('root'))
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
