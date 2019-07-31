@@ -1,61 +1,22 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Menu from './common/Menu';
+import Menus from './common/Menu';
 import Table from './common/Table'
+import { Row, Col } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
+import '../public/css/Layout.css';
+import CONFIG from '../config';
+import { Link } from 'react-router-dom'
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        
-    },
-    container: {
-        flexGrow: 1,
-        backgroundColor:theme.palette.background.paper,
-        height:'100vh'
-    },
-    display: {
-        display:'flex',
-        flexDirection:'row',
-    }
-}))
+const { SubMenu } = Menu;
+const { Content, Sider } = Layout;
 
-function BaseContainer() {
-    const classes = useStyles()
-    return (
-        <React.Fragment>
-            <CssBaseline/>
-            <Container fixed className={classes.container}>
-            <App_Bar></App_Bar>
-            <div className={classes.display}>
-                <Menu/>
-                <Table/>
-            </div>
-            </Container>
-        </React.Fragment>
-    )
-}
+export default class Summer extends React.Component {
 
-function App_Bar(){
-
-    return (
-        <div>
-            <AppBar position='static'>
-                <Typography variant='h6' color='inherit' style={{paddingLeft:40}}>
-                    <p>小程序后台管理</p>
-                </Typography>
-            </AppBar>
-        </div>
-    )
-}
-
-export default class App extends React.Component {
-    render(){
+    render() {
         return (
-            <BaseContainer>   
-            </BaseContainer>
+            <div>
+                <p>我是App组件</p>
+            </div>
         )
     }
 }

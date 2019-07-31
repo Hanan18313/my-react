@@ -1,67 +1,98 @@
-import React from 'react';
-import CONFIG from '../../config';
+import React from 'react'
 import { Menu, Icon } from 'antd';
-import '../../public/css/App.css';
+import CONFIG from '../../config'
 import { Link } from 'react-router-dom'
 
 const { SubMenu } = Menu;
 
 export default class BaseTable extends React.Component {
-  
-  rootSubmenuKeys = ['sub1']
+  // submenu keys of first level
+  rootSubmenuKeys = [];
   constructor(props) {
     super(props)
     this.state = {
-      openKeys:['sub1']
-    }
+      openKeys: ['miniNameOne'],
+      selectedKeys:[]
+    };
   }
-  onOpenChange = openkeys => {
-    const latestOpenKey = openkeys.find(key => this.state.openKeys.indexOf(key) === -1);
-    if(this.rootSubmenuKeys.indexOf(latestOpenKey) === -1){
-      this.setState({openKeys:this.state.openKeys});
-    }else{
+  componentDidUpdate() {
+    const href = window.location.hash.slice(1)
+    CONFIG.menus.forEach((item,index) => {
+      if(item.subMenus.length > 0){
+        item.subMenus.forEach((itm,indx) => {
+          if(itm.subpath == href){
+            this.setState({
+              selectedKeys:[itm.key]
+            })
+          }
+        })
+      }else if(item.path == '/Index'){
+        this.setState({
+          selectedKeys:['Index']
+        })
+      }
+    })
+  }
+
+  onOpenChange = openKeys => {
+    const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
+    if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      this.setState({ openKeys });
+    } else {
       this.setState({
-        openKeys:latestOpenKey ? [latestOpenKey] : []
+        openKeys: latestOpenKey ? [latestOpenKey] : [],
       });
     }
+  };
+
+  handleClick(e){
+    this.setState({
+      selectedKeys:[e.key]
+    })
   }
-  handleClick = e => {
-    console.log(e)
-  }
+
+
   render() {
+    const { menus } = this.props
+    const { selectedKeys } = this.state;
     return (
       <Menu
-      onClick={this.handleClick}
-      style={{width:260}}
-      defaultSelectedKeys={['1']}
-      mode="inline"
+        mode="inline"
+        openKeys={this.state.openKeys}
+        onOpenChange={this.onOpenChange}
+        defaultSelectedKeys={this.state.selectedKeys}
+        selectedKeys={this.state.selectedKeys}
+        style={{ width: 260 }}
+        onClick={e => this.handleClick(e)}
       >
-        <Menu.Item
-        key='1'
-        >
-          首页
-          <Link to='/Index' />
-        </Menu.Item>
-        {this.props.menus.map(menu => {
-          return (
-            <SubMenu
-              key={menu.id}
+        {CONFIG.menus.map(menu => {
+          this.rootSubmenuKeys.push(menu.key)
+          if(menu.subMenus.length == 0){
+            return (
+              <Menu.Item key='index'>
+                <Link to='/Index'>首页</Link>
+              </Menu.Item>
+            )
+          }else{
+            return (
+              <SubMenu
+              key={menu.key}
               title={
-              <span>
-                  {menu.text}
-              </span>
+                <span>{menu.text}</span>
               }
-          >
-              {menu.subMenus.map(subMenu => (
-                  <Menu.Item href={subMenu.subpathname} key={subMenu.id}>{subMenu.text}
-                      <Link to={subMenu.subpathname}></Link>
-                  </Menu.Item>
-                  
-              ))}
-          </SubMenu>
-          )
+              >
+                {menu.subMenus.map(subMenu => {
+                  return (
+                    <Menu.Item key={subMenu.key}>
+                      <Link to={subMenu.subpath}>{subMenu.text}</Link>
+                    </Menu.Item>
+                  )
+                })}
+              </SubMenu>
+            )
+          }
         })}
       </Menu>
-    )
+    );
   }
 }

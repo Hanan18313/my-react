@@ -1,16 +1,21 @@
-import React from 'react';
-import Menus from './common/Menu';
-import Table from './common/Table'
+import React from 'react'
+import Menus from '../common/Menu';
+import Table from '../common/Table'
 import { Row, Col } from 'antd';
 import { Layout, Menu, Icon } from 'antd';
-import '../public/css/Layout.css';
-import CONFIG from '../config';
+import '../../public/css/Layout.css';
+import CONFIG from '../../config';
 import { Link } from 'react-router-dom'
 
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
 
-export default class Summer extends React.Component {
+export default class MiniOneManage extends React.Component {
+
+    handleClick = e => {
+        console.log(e)
+        console.log(window.location)
+    }
 
     render() {
         return (
@@ -18,8 +23,7 @@ export default class Summer extends React.Component {
                 <Layout>
                     <Layout>
                     <Sider width={260} style={{ background: '#fff' }}>
-                        <Menus
-                         menus={CONFIG.menus}/>
+                        <Menus  />
                     </Sider>
                     <Layout style={{ padding: '24px 24px 24px' }}>
                         <Content
@@ -30,7 +34,7 @@ export default class Summer extends React.Component {
                             minHeight: 280,
                         }}
                         >
-                        <Table/>
+                        <p>这是管理界面一</p>
                         </Content>
                     </Layout>
                     </Layout>

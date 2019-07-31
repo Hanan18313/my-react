@@ -3,30 +3,52 @@ const CONFIG = {
     pathName:'',
     menus:[
         {
+            id:'0',
+            tetx:'首页',
+            key:'index',
+            path:'/Index',
+            subMenus:[]
+        },
+        {
             id:'1',
-            text:'朗杰会员凉爽一夏',
-            type:'summer',
-            pathname:'#/Summer',
+            text:'小程序名称一',
+            key:'miniNameOne',
+            path:'/miniOne',
             subMenus:[
                 {
                     id:'1-1',
-                    text:'参与人员管理',
-                    subpathname:'/Summer/join'
+                    text:'管理一',
+                    key:'miniOneManage1',
+                    subpath:'/miniOne/manage1'
                 },
                 {
                     id:'1-2',
-                    text:'**子导航二管理',
-                    subpathname:'/Summer/nav2'
+                    text:'管理二',
+                    key:'miniOneManage2',
+                    subpath:'/miniOne/manage2'
                 }
             ]
         },
         {
-            id:'3',
-            text:'导航三',
-            type:'nav3',
-            pathname:'#/Nav3',
-            subMenus:[]
-        }
+            id:'2',
+            text:'小程序名称二',
+            key:'miniNameTwo',
+            path:'/miniTwo',
+            subMenus:[
+                {
+                    id:'2-1',
+                    text:'管理三',
+                    key:'miniTwoManage1',
+                    subpath:'/miniTwo/manage1'
+                },
+                {
+                    id:'2-2',
+                    text:'管理四',
+                    key:'miniTwoManage2',
+                    subpath:'/miniTwo/manage2'
+                }
+            ]
+        },
     ]
 }
 

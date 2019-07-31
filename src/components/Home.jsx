@@ -13,8 +13,7 @@ const { Content, Sider } = Layout;
 export default class Home extends React.Component {
 
     handleClick = e => {
-        console.log(e)
-        console.log(window.location)
+
     }
 
     render() {
@@ -34,7 +33,7 @@ export default class Home extends React.Component {
                             minHeight: 280,
                         }}
                         >
-                        <p>这是Home</p>
+                        <p>这是首页</p>
                         </Content>
                     </Layout>
                     </Layout>
