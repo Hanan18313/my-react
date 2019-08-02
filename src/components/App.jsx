@@ -10,13 +10,12 @@ import { Link } from 'react-router-dom'
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
 
-export default class Summer extends React.Component {
+export default function App (){
+       
 
-    render() {
-        return (
-            <div>
-                <p>我是App组件</p>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <p>我是App组件</p>
+        </div>
+    )
 }

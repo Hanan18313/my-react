@@ -1,51 +1,57 @@
 const CONFIG = {
-    url:'https://summer.langjie.com/summer',
+    url:'http://192.168.50.80:7090/summer',
     pathName:'',
     menus:[
         {
             id:'0',
-            tetx:'首页',
-            key:'index',
+            text:'首页',
+            key:'Index',
             path:'/Index',
             subMenus:[]
         },
         {
             id:'1',
             text:'小程序名称一',
-            key:'miniNameOne',
+            key:'sub1',
             path:'/miniOne',
             subMenus:[
                 {
                     id:'1-1',
                     text:'管理一',
-                    key:'miniOneManage1',
-                    subpath:'/miniOne/manage1'
+                    key:'1',
+                    subpath:'/miniOne/ManageOne'
                 },
                 {
                     id:'1-2',
                     text:'管理二',
-                    key:'miniOneManage2',
-                    subpath:'/miniOne/manage2'
+                    key:'2',
+                    subpath:'/miniOne/ManageTwo'
+                },
+                {
+                    id:'1-3',
+                    text:'管理三',
+                    key:'3',
+                    subpath:'/miniOne/ManageThree'
                 }
             ]
         },
         {
             id:'2',
             text:'小程序名称二',
-            key:'miniNameTwo',
+            key:'sub2',
             path:'/miniTwo',
             subMenus:[
                 {
                     id:'2-1',
                     text:'管理三',
-                    key:'miniTwoManage1',
-                    subpath:'/miniTwo/manage1'
+                    key:'4',
+                    subpath:'/miniTwo/ManageOne'
                 },
                 {
                     id:'2-2',
                     text:'管理四',
-                    key:'miniTwoManage2',
-                    subpath:'/miniTwo/manage2'
+                    key:'5',
+                    subpath:'/miniTwo/ManageTwo'
                 }
             ]
         },

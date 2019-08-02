@@ -1,37 +1,27 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Table, Divider } from 'antd';
 import reqwest from 'reqwest';
 import CONFIG from '../../config'
 import '../../public/css/App.css'
 
-const column = [
-  {
-    title: '姓名',
-    dataIndex: 'name',
-    sorter: true,
-    render: name => `${name.first} ${name.last}`,
-    width: '20%'
-  },
-  {
-    title: '性别',
-    dataIndex: 'gender',
-    filters: [{ text: 'Male', value: 'male' }, { text: 'Female', value: 'female' }],
-    width: '20%',
-  },
-  {
-    title: '邮箱',
-    dataIndex: 'email',
-  },
-]
 
 export default class BaseTable extends React.Component {
-  state = {
-    data: [],
-    pagination: {},
-    loading: false,
-  };
-  componentDidMount() {
-    this.fetch();
+  constructor(props){
+    super(props)
+    this.state = {
+      pagination: {},
+  
+    };
+  }
+  componentWillMount() {
+    //this.fetch();
+    // const { columns, dataSource, loading } = this.props
+    // this.setState({
+    //   columns,
+    //   dataSource,
+    //   loading,
+    // })
+    console.log(this.props)
   }
 
   handleTableChange = (pagination, filters,sorter) => {
@@ -72,14 +62,18 @@ export default class BaseTable extends React.Component {
     })
   };
   render() {
+    let loading = true
+    const { columns, dataSource } = this.props
+    loading = this.props.loading
     return (
       <Table
-      columns={column}
-      rowKey={record => record.login.uuid}
-      dataSource={this.state.data}
-      pagination={this.state.pagination}
-      loading={this.state.loading}
-      onChange={this.handleTableChange}
+      style={{width:'100%',minWidth:1200}}
+      columns={columns}
+      // rowKey={record => record.login.uuid}
+      dataSource={dataSource}
+      // pagination={this.state.pagination}
+      loading={loading}
+      // onChange={this.handleTableChange}
       ></Table>
     )
   }
