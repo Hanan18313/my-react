@@ -1,7 +1,6 @@
 import React from 'react';
-import { Table, Divider } from 'antd';
+import { Table, Divider, Pagination } from 'antd';
 import reqwest from 'reqwest';
-import CONFIG from '../../config'
 import '../../public/css/App.css'
 
 
@@ -10,10 +9,14 @@ export default class BaseTable extends React.Component {
     super(props)
     this.state = {
       pagination: {},
+      dataSource: [],
+      loading: false
   
     };
   }
+  
   componentWillMount() {
+    console.log('加载willTable组件')
     //this.fetch();
     // const { columns, dataSource, loading } = this.props
     // this.setState({
@@ -21,58 +24,24 @@ export default class BaseTable extends React.Component {
     //   dataSource,
     //   loading,
     // })
-    console.log(this.props)
+  }
+  componentDidMount() {
+    console.log('加载didTable组件')
   }
 
-  handleTableChange = (pagination, filters,sorter) => {
-    const paper = {...this.state.pagination}
-    paper.current = pagination.current;
-    this.setState({
-      pagination:paper
-    })
-
-    this.fetch({
-      results:pagination.pageSize,
-      page:pagination.current,
-      sortField: sorter.field,
-      sortOrder: sorter.order,
-      ...filters
-    });
-  };
-
-  fetch = (params = {}) => {
-    this.setState({loading:true});
-    reqwest({
-      url:'https://randomuser.me/api',
-      method:'GET',
-      data:{
-        results: 10,
-        ...params,
-      },
-      type:'json'
-    }).then(data => {
-      const pagination = { ...this.state.pagination };
-      pagination.total = data.totalCount;
-      pagination.total = 200
-      this.setState({
-        loading: false,
-        data: data.results,
-        pagination,
-      })
-    })
-  };
   render() {
     let loading = true
-    const { columns, dataSource } = this.props
+    const { columns, dataSource, scroll, pagination } = this.props
     loading = this.props.loading
     return (
       <Table
-      style={{width:'100%',minWidth:1200}}
+      style={{width:'100%'}}
       columns={columns}
-      // rowKey={record => record.login.uuid}
+      rowKey={record => record.id}
       dataSource={dataSource}
-      // pagination={this.state.pagination}
       loading={loading}
+      scroll={scroll}
+      pagination={pagination}
       // onChange={this.handleTableChange}
       ></Table>
     )

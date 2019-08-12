@@ -1,7 +1,6 @@
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import CONFIG from '../config';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './Home';
 import miniSampleOneManageOne from './miniSampleTwo/ManageOne';
@@ -9,8 +8,11 @@ import miniSampleOneManageTwo from './miniSampleOne/ManageTwo';
 import miniSampleOneManageThree from './miniSampleOne/ManageThree';
 import miniSampleTwoManageOne from './miniSampleTwo/ManageOne';
 import miniSampleTwoManageTwo from './miniSampleTwo/ManageTwo';
-import '../public/css/Layout.css'
-import '../public/css/App.css'
+import EditUserInfo from './miniSampleOne/EditUserInfo';
+import '../public/css/Layout.css';
+import '../public/css/App.css';
+import axios from 'axios';
+import urlList from '../public/js/Common';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -18,8 +20,9 @@ const { Header, Content, Sider } = Layout;
 export default class Center extends React.Component {
     rootSubmenuKeys = [];
     state = {
-        openKeys: ['Index'],
-        current:[]
+        openKeys: ['index'],
+        current:[],
+        MenuSider:[]
     };
     onOpenChange = openKeys => {
         const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
@@ -34,16 +37,31 @@ export default class Center extends React.Component {
 
     handleClick(e) {
         
-        
     }
-    componentWillMount() {
-        const menu = CONFIG.menus
-        menu.forEach((item, index) => {
-            this.rootSubmenuKeys.push(item.key)
+    Fetch(){
+        //let token = window.top.sessionStorage.getItem('token');
+        let token = 'eyJkYXRhIjp7InVzZXJJZCI6IjE4MDIiLCJwYXNzV29yZCI6ImUxMGFkYzM5NDliYTU5YWJiZTU2ZTA1N2YyMGY4ODNlIn0sImNyZWF0ZWQiOjE1NjU1NzAwODczNjIsImV4cCI6MzYwMDAwMH0=.wPlTMyuS2DW3z69n8q55fvt+lKPoETXm3CAFf8Y7Dkg='
+        axios.get(urlList.getMenuSider,{
+            headers:{
+                "Content-Type":"application/json",
+                'Token':token
+            },
+            
+        }).then(menu => {
+            if(menu.status == 200){
+                //console.log(menu)
+                this.setState({
+                    MenuSider:menu.data
+                })
+                menu.data.forEach((item,index) => {
+                    this.rootSubmenuKeys.push(item.key)
+                })
+            }
         })
     }
-    componentDidUpdate(){
-        console.log('执行componentDidUpdate')
+    componentWillMount() {
+        
+        this.Fetch()
     }
 
     render () {
@@ -68,13 +86,13 @@ export default class Center extends React.Component {
                     <Sider width={200} style={{ background: '#fff' }}>
                         <Menu
                         mode="inline"
-                        defaultSelectedKeys={['Index']}
+                        defaultSelectedKeys={['index']}
                         openKeys={this.state.openKeys}
                         onOpenChange={this.onOpenChange}
                         onClick={this.handleClick}
                         style={{ height: '100%', borderRight: 0 }}
                         >
-                            {CONFIG.menus.map(menu => {
+                            {this.state.MenuSider.map(menu => {
                                 if(menu.subMenus.length == 0){
                                     return (
                                         <Menu.Item
@@ -96,7 +114,7 @@ export default class Center extends React.Component {
                                                     <Menu.Item
                                                     key={subMenu.key}
                                                     >
-                                                        <Link to={subMenu.subpath}>{subMenu.text}</Link>
+                                                        <Link to={subMenu.path}>{subMenu.text}</Link>
                                                     </Menu.Item>
                                                 )
                                             })}
@@ -106,7 +124,7 @@ export default class Center extends React.Component {
                             })}
                         </Menu>
                     </Sider>
-                    <Layout style={{ padding: '0 24px 24px' }}>
+                    <Layout style={{ padding: '0 0 24px 24px' }}>
                         <Content
                         style={{
                             background: '#fff',
@@ -117,13 +135,14 @@ export default class Center extends React.Component {
                         >
                             <Switch>           
                                 {/* <Route path='/Home' component={Home}/> */}
-                                <Route path='/Index' component={Home} />
-                                <Route path='/miniOne/ManageOne' component={miniSampleOneManageOne} />
-                                <Route path='/miniOne/ManageTwo' component={miniSampleOneManageTwo} />
-                                <Route path='/miniOne/ManageThree' component={miniSampleOneManageThree} />
-                                <Route path='/miniTwo/ManageOne' component={miniSampleTwoManageOne} />
-                                <Route path='/miniTwo/ManageTwo' component={miniSampleTwoManageTwo} />
-                                {/* <Redirect from='/' to='/Home'/> */}
+                                <Route path='/index' component={Home} />
+                                <Route path='/firstAppletMan1' component={miniSampleOneManageOne} />
+                                <Route path='/firstAppletMan2' component={miniSampleOneManageTwo} />
+                                <Route path='/firstAppletMan3' component={miniSampleOneManageThree} />
+                                <Route path='/secondAppletMan1' component={miniSampleTwoManageOne} />
+                                <Route path='/secondAppletMan2' component={miniSampleTwoManageTwo} />
+                                <Route path='/EditUserInfo' component={EditUserInfo} />
+                                <Redirect from='/' to='/index'/>
                             </Switch>
                         </Content>
                     </Layout>
