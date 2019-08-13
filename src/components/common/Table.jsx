@@ -16,7 +16,7 @@ export default class BaseTable extends React.Component {
   }
   
   componentWillMount() {
-    console.log('加载willTable组件')
+   // console.log('加载willTable组件')
     //this.fetch();
     // const { columns, dataSource, loading } = this.props
     // this.setState({
@@ -26,16 +26,17 @@ export default class BaseTable extends React.Component {
     // })
   }
   componentDidMount() {
-    console.log('加载didTable组件')
+    //console.log('加载didTable组件')
   }
 
   render() {
     let loading = true
-    const { columns, dataSource, scroll, pagination } = this.props
+    const { columns, dataSource, scroll, pagination, onRow } = this.props
     loading = this.props.loading
     return (
       <Table
       style={{width:'100%'}}
+      onRow={onRow}
       columns={columns}
       rowKey={record => record.id}
       dataSource={dataSource}

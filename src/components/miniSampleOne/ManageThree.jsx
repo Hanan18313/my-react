@@ -51,7 +51,7 @@ const columns = [
                 <span>
                     <a href='javascript:;'>删除</a>
                     <Divider type='vertical' />
-                    <a href='#/EditUserInfo'>编辑</a>
+                    <a href={`/#/EditUserInfo?id=${record.id}`}>编辑</a>
                 </span>
             )
         }
@@ -73,11 +73,14 @@ export default class ManageThree extends React.Component {
         }
     }
     Fetch(params){
+        let token = 'eyJkYXRhIjp7InVzZXJJZCI6IjE4MDIiLCJwYXNzV29yZCI6ImUxMGFkYzM5NDliYTU5YWJiZTU2ZTA1N2YyMGY4ODNlIn0sImNyZWF0ZWQiOjE1NjU1NzAwODczNjIsImV4cCI6MzYwMDAwMH0=.wPlTMyuS2DW3z69n8q55fvt+lKPoETXm3CAFf8Y7Dkg='
+
         axios.get(urlList.getUserAll,{
             params:params,
             headers:{
                 'Content-Type':'application/json',
-                'unionId':'123'
+                'unionId':'123',
+                'token':token
             },
         }).then(res => {
             this.setState({
@@ -122,7 +125,21 @@ export default class ManageThree extends React.Component {
         }
         return (
             <div>
-                <Table columns={columns} dataSource={this.state.dataSource} loading={this.state.loading} scroll={{x: 1500,y: 600}} pagination={pagination} />
+                <Table
+                onRow={(record, index) => {
+                    return{
+                        onClick: event => {
+                            console.log(index)
+                        }
+                    }
+                }}
+                columns={columns}
+                dataSource={this.state.dataSource}
+                loading={this.state.loading}
+                scroll={{x: 1500,y: 600}}
+                pagination={pagination}
+                
+                />
             </div>
         )
     }

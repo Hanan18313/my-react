@@ -13,6 +13,7 @@ var urlList = {
     // proxy:proxy_url
     getMenuSider: base_url+'/getMenuSider',
     getUserAll: base_url+'/findAll',
+    getUserOne: base_url+'/findOne'
 }
 
 module.exports = urlList
