@@ -1,7 +1,6 @@
 //const base_url = 'https://testsummer.langjie.com'
-// const Menu_url = 'https://testsummer.langjie.com'
-const base_url = 'http://192.168.50.80:7090'
-//const Menu_url = 'http://192.168.50.80:7001'
+const base_url = 'https://testsummer.langjie.com'
+//const base_url = 'http://192.200.233.86:7090'
 //const proxy_url ='https://api.langjie.com/action/reg/1234567'
 
 var urlList = {
@@ -12,6 +11,7 @@ var urlList = {
     // getMenuSider:Menu_url+'/getMenuSider',
     // proxy:proxy_url
     getMenuSider: base_url+'/getMenuSider',
+    getSignUpList: base_url+'/actionTrain/signUpList',//获取报名列表
     getUserAll: base_url+'/findAll',
     getUserOne: base_url+'/findOne'
 }

@@ -3,12 +3,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './Home';
-import miniSampleOneManageOne from './miniSampleTwo/ManageOne';
-import miniSampleOneManageTwo from './miniSampleOne/ManageTwo';
-import miniSampleOneManageThree from './miniSampleOne/ManageThree';
-import miniSampleTwoManageOne from './miniSampleTwo/ManageOne';
-import miniSampleTwoManageTwo from './miniSampleTwo/ManageTwo';
-import EditUserInfo from './miniSampleOne/EditUserInfo';
+// import miniSampleOneManageOne from './miniSampleTwo/ManageOne';
+// import miniSampleOneManageTwo from './miniSampleOne/ManageTwo';
+// import miniSampleOneManageThree from './miniSampleOne/ManageThree';
+// import miniSampleTwoManageOne from './miniSampleTwo/ManageOne';
+// import miniSampleTwoManageTwo from './miniSampleTwo/ManageTwo';
+// import EditUserInfo from './miniSampleOne/EditUserInfo';
+import ActionTrainSignUp from './actionTrain/ActionTrain-signUp'
 import '../public/css/Layout.css';
 import '../public/css/App.css';
 import axios from 'axios';
@@ -44,7 +45,7 @@ export default class Center extends React.Component {
         axios.get(urlList.getMenuSider,{
             headers:{
                 "Content-Type":"application/json",
-                'Token':token
+                //'Token':token
             },
             
         }).then(menu => {
@@ -130,18 +131,19 @@ export default class Center extends React.Component {
                             background: '#fff',
                             padding: 24,
                             margin: 0,
-                            minHeight: 480,
+                            minHeight: 600,
                         }}
                         >
                             <Switch>           
                                 {/* <Route path='/Home' component={Home}/> */}
                                 <Route path='/index' component={Home} />
-                                <Route path='/firstAppletMan1' component={miniSampleOneManageOne} />
+                                {/* <Route path='/firstAppletMan1' component={miniSampleOneManageOne} />
                                 <Route path='/firstAppletMan2' component={miniSampleOneManageTwo} />
                                 <Route path='/firstAppletMan3' component={miniSampleOneManageThree} />
                                 <Route path='/secondAppletMan1' component={miniSampleTwoManageOne} />
                                 <Route path='/secondAppletMan2' component={miniSampleTwoManageTwo} />
-                                <Route path='/EditUserInfo' component={EditUserInfo} />
+                                <Route path='/EditUserInfo' component={EditUserInfo} /> */}
+                                <Route path="/actionTrain/signUp" component={ActionTrainSignUp} />>
                                 <Redirect from='/' to='/index'/>
                             </Switch>
                         </Content>

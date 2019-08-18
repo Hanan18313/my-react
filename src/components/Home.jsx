@@ -17,7 +17,7 @@ export default class Home extends React.Component {
 
     render() {
         return (
-           <p>我是Home组件</p>
+           <p>首页</p>
         )
     }
 }

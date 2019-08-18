@@ -80,7 +80,7 @@ export default class ManageThree extends React.Component {
             headers:{
                 'Content-Type':'application/json',
                 'unionId':'123',
-                'token':token
+               // 'token':token
             },
         }).then(res => {
             this.setState({

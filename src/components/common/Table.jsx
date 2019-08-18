@@ -30,9 +30,10 @@ export default class BaseTable extends React.Component {
   }
 
   render() {
-    let loading = true
-    const { columns, dataSource, scroll, pagination, onRow } = this.props
-    loading = this.props.loading
+    //let loading = true
+    const { columns, dataSource, scroll, pagination, onRow, loading } = this.props
+    console.log(scroll)
+    //loading = this.props.loading
     return (
       <Table
       style={{width:'100%'}}
