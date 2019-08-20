@@ -1,7 +1,8 @@
 import React from 'react';
 import { Table, Divider, Pagination } from 'antd';
 import reqwest from 'reqwest';
-import '../../public/css/App.css'
+import '../../public/css/App.css';
+import axios from 'axios'
 
 
 export default class BaseTable extends React.Component {
@@ -10,8 +11,8 @@ export default class BaseTable extends React.Component {
     this.state = {
       pagination: {},
       dataSource: [],
-      loading: false
-  
+      loading: false,
+      params:{}
     };
   }
   
@@ -27,13 +28,34 @@ export default class BaseTable extends React.Component {
   }
   componentDidMount() {
     //console.log('加载didTable组件')
+    this.setState({
+      params: this.props.filterParams
+    })
+  }
+
+  handleTableChange = () => {
+    let params = this.state.params
+    console.log(params)
+    this.Fetch(params)
+  }
+  Fetch(params){
+    axios.get(params.req_url,{
+      headers: {
+        'Content-Type':'application/json'
+      },
+      params:{
+        page: params.page,
+        pageSize: params.pageSize
+      }
+    }).then(res => {
+      console.log(res)
+    })
   }
 
   render() {
-    //let loading = true
-    const { columns, dataSource, scroll, pagination, onRow, loading } = this.props
-    console.log(scroll)
-    //loading = this.props.loading
+    const { columns, dataSource, scroll, pagination, onRow, loading, filterParams } = this.props
+   // console.log(this.props)
+    
     return (
       <Table
       style={{width:'100%'}}
@@ -44,7 +66,7 @@ export default class BaseTable extends React.Component {
       loading={loading}
       scroll={scroll}
       pagination={pagination}
-      // onChange={this.handleTableChange}
+      onChange={this.handleTableChange}
       ></Table>
     )
   }

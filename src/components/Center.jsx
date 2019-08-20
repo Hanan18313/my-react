@@ -3,13 +3,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './Home';
-// import miniSampleOneManageOne from './miniSampleTwo/ManageOne';
-// import miniSampleOneManageTwo from './miniSampleOne/ManageTwo';
-// import miniSampleOneManageThree from './miniSampleOne/ManageThree';
-// import miniSampleTwoManageOne from './miniSampleTwo/ManageOne';
-// import miniSampleTwoManageTwo from './miniSampleTwo/ManageTwo';
-// import EditUserInfo from './miniSampleOne/EditUserInfo';
-import ActionTrainSignUp from './actionTrain/ActionTrain-signUp'
+import ActionTrainSignUp from './actionTrain/ActionTrain-signUp';
+import ActionTrainSign from './actionTrain/ActionTrainSign';
 import '../public/css/Layout.css';
 import '../public/css/App.css';
 import axios from 'axios';
@@ -137,13 +132,8 @@ export default class Center extends React.Component {
                             <Switch>           
                                 {/* <Route path='/Home' component={Home}/> */}
                                 <Route path='/index' component={Home} />
-                                {/* <Route path='/firstAppletMan1' component={miniSampleOneManageOne} />
-                                <Route path='/firstAppletMan2' component={miniSampleOneManageTwo} />
-                                <Route path='/firstAppletMan3' component={miniSampleOneManageThree} />
-                                <Route path='/secondAppletMan1' component={miniSampleTwoManageOne} />
-                                <Route path='/secondAppletMan2' component={miniSampleTwoManageTwo} />
-                                <Route path='/EditUserInfo' component={EditUserInfo} /> */}
-                                <Route path="/actionTrain/signUp" component={ActionTrainSignUp} />>
+                                <Route path="/actionTrain/signUp" component={ActionTrainSignUp} />
+                                <Route path='/secondAppletManage1' component={ActionTrainSign}></Route>
                                 <Redirect from='/' to='/index'/>
                             </Switch>
                         </Content>

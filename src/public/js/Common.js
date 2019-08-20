@@ -1,6 +1,6 @@
 //const base_url = 'https://testsummer.langjie.com'
-const base_url = 'https://testsummer.langjie.com'
-//const base_url = 'http://192.200.233.86:7090'
+//const base_url = 'https://testsummer.langjie.com'
+const base_url = 'http://192.168.50.80:7090'
 //const proxy_url ='https://api.langjie.com/action/reg/1234567'
 
 var urlList = {
